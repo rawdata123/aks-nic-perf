@@ -20,10 +20,10 @@ spec:
         - name: net.ipv4.ip_local_port_range
           value: "10240 65535"
       nodeSelector:
-        kubernetes.io/hostname: aks-agentpool-13576299-vmss000000
+        kubernetes.io/hostname: <aks-node-label-0>
       serviceAccountName: nginx-ingress
       containers:
-      - image: nginx/nginx-ingress:edge
+      - image: <private-registry-nginx-plus-location>
         imagePullPolicy: Always
         name: nginx-ingress
         ports:
@@ -62,7 +62,6 @@ spec:
         args:
           - -nginx-configmaps=$(POD_NAMESPACE)/nginx-config
           - -default-server-tls-secret=$(POD_NAMESPACE)/default-server-secret
-
          #- -v=3 # Enables extensive logging. Useful for troubleshooting.
          #- -report-ingress-status
          #- -external-service=nginx-ingress
