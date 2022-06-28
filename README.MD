@@ -1,6 +1,6 @@
 # Sizing NGINX Ingress Controller with App Protect on AKS
 
-##Overview
+## Overview
 
 You can use this repository to replicate the testing environment we used for sizing the NGINX Ingress Controller with App Protect on a managed AKS (Azure Kubernetes Service)
 
@@ -15,6 +15,7 @@ Apply the backend app deployment
 ```
 $ kubectl apply -f volumes.yaml
 $ kubectl apply -f backend-deployment.yaml
+```
 
 Install and configure the NGINX Plus Ingress Controller. Replace the fields with <> brackets
 
@@ -37,7 +38,9 @@ $ kubectl apply -f app-protect/waf.yaml
 
 Uncomment the fields in the app-virtual-server.yaml and apply the updated VirtualServer resource.
 
-```$ kubectl apply -f app-virtual-server.yaml```
+```
+$ kubectl apply -f app-virtual-server.yaml
+```
 
 
 ## Author information
