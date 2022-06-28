@@ -1,0 +1,19 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: app-ingress
+spec:
+  host: app.example.com
+  #uncomment to enable app protect
+  #policies:
+  #- name: waf-policy-prime
+  tls:
+    secret: bookinfo-secret
+  upstreams:
+  - name: web-server-payload
+    service: web-server-svc
+    port: 80
+  routes:
+  - path: /
+    action:
+      pass: web-server-payload

@@ -1,0 +1,14 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginx-config
+  namespace: nginx-ingress
+data:
+  keepalive: "150"
+  worker-processes: "8"
+  worker-cpu-affinity: "auto 0101010101010101"
+  worker-connections: "100000"
+  worker-rlimit-nofile: "102400"
+  keepalive-timeout: "315s"
+  keepalive-requests: "10000000"
+  access-log-off: "True"

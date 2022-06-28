@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server-payload
+spec:
+  selector:
+    matchLabels:
+      app: web-server-payload
+  template:
+    metadata:
+      labels:
+        app: web-server-payload
+    spec:
+      containers:
+      - name: web-server-payload
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: app-config-volume
+          mountPath: /etc/nginx/conf.d
+        - name: main-config-volume
+          mountPath: /etc/nginx
+        - name: binary-payload
+          mountPath: /usr/share/nginx/bin
+      volumes: 
+      - name: app-config-volume
+        configMap:
+          name: app-conf
+      - name: main-config-volume
+        configMap:
+          name: main-conf
+      - name: binary-payload
+        configMap:
+          name: binary 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-server-svc
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: web-server-payload
